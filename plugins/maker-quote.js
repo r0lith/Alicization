@@ -28,7 +28,7 @@ let handler = async (m, { conn, text }) => {
     
     let userPfp = await conn
       .profilePictureUrl(who, 'image')
-      .catch(_ => null)
+      .catch(_ => 'https://i.ibb.co/0rK5vH5/tra.png')
     let user = global.db.data.users[who]
     let { name } = global.db.data.users[who]
 
@@ -38,8 +38,8 @@ let handler = async (m, { conn, text }) => {
       type: 'quote',
       format: 'png',
       backgroundColor: '#FFFFFF',
-      width: 1800,
-      height: 200, // Adjust the height value as desired
+      width: 500,
+      height: 500, // Adjust the height value as desired
       scale: 2,
       messages: [
         {

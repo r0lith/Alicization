@@ -15,8 +15,8 @@ m.react('💬')
 	}
 
 }
-handler.help = ['ai <text>']; 
+handler.help = ['ai <text>'];
 handler.tags = ['tools'];
-handler.command = ['ia', 'ai', 'chatgpt', 'openai', 'gpt'];
+handler.command = ['ia', 'ai', 'R', 'openai', 'gpt']; // Updated to include "R" instead of "chatgpt"
 
 export default handler;

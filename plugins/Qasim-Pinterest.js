@@ -16,7 +16,7 @@ const fetchWithRetry = async (url, options, retries = 3) => {
 };
 
 const handler = async (m, { conn, args }) => {
-  if (!args[0]) throw '✳️ Enter the Pinterest link next to the command';
+  if (!args[0]) throw '✳️ Enter the Pinterest Video link next to the command';
   if (!args[0].match(/(pinterest\.com\/pin\/|pin\.it\/)/gi)) throw '❌ Link incorrect';
 
   m.react('⏳');

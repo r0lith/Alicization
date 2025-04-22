@@ -21,8 +21,8 @@ let handler = async (m, { conn, usedPrefix }) => {
     let greeting = ucapan();
 
     let str = `
-      『 *ULTRA-MD* 』  
-      © 2024 *GlobalTechInfo*`;
+      『 *MEGA-AI* 』  
+      © 2025 *Riruru*`;
 
     let msg = generateWAMessageFromContent(m.chat, {
         viewOnceMessage: {
@@ -39,7 +39,7 @@ let handler = async (m, { conn, usedPrefix }) => {
                         text: "Use The Below Buttons"
                     }),
                     header: proto.Message.InteractiveMessage.Header.create({
-                        ...(await prepareWAMessageMedia({ image: { url: './assets/Ultra.jpg' } }, { upload: conn.waUploadToServer })),
+                        ...(await prepareWAMessageMedia({ image: { url: './assets/A.jpg' } }, { upload: conn.waUploadToServer })),
                         title: null,
                         subtitle: null,
                         hasMediaAttachment: false
@@ -93,7 +93,7 @@ let handler = async (m, { conn, usedPrefix }) => {
                                 "name": "cta_url",
                                 "buttonParamsJson": JSON.stringify({
                                     "display_text": "SCRIPT 💕",
-                                    "url": "https://github.com/GlobalTechInfo/ULTRA-MD"
+                                    "url": "https://github.com/Riruru/ULTRA-MD"
                                 })
                             }
                         ],

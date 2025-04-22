@@ -5,7 +5,7 @@ const { threads } = pkg;
 const handler = async (message, { conn, args }) => {
   // Check if the URL is provided in the command arguments
   if (!args[0]) {
-    throw '✳️ Enter the Instagram Threads link next to the command';
+    throw '✳️ Enter the Instagram Threads Video link next to the command';
   }
 
   // Validate the URL format for Instagram Threads

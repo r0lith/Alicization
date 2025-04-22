@@ -7,7 +7,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 
 figlet(
-  'ULTRA MD',
+  'MEGA AI',
   {
     font: 'Ghost',
     horizontalLayout: 'default',

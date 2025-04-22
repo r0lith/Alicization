@@ -2,14 +2,14 @@ let handler = async m =>
   m.reply(
     `
 
-≡ © GlobalTechInfo Groups
+≡ © Riruru Groups
 
 ─────────────
 ▢ Join WhatsApp Channel For Updates
 https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07
 
 ▢ Group 2
-https://t.me/GlobalBotInc
+https://t.me/GlobalTechOwner
 
 ─────────────
 ≡ Disabled links? Chat Directly! 
@@ -21,7 +21,7 @@ https://t.me/GlobalBotInc
  https://instagram.com/global.techinfo
 
 ▢ *YouTube*
-• https://www.youtube.com/@GlobalTechInfo
+• https://www.youtube.com/@Riruru
 
 
 `.trim()

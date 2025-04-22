@@ -16,7 +16,7 @@ const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
 };
 
 const handler = async (m, { conn, args }) => {
-  if (!args[0]) throw '✳️ Enter the Google Drive link next to the command';
+  if (!args[0]) throw '✳️ Enter the Google Drive Video link next to the command';
 
   m.react('⏳');
   try {

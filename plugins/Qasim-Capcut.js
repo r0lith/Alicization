@@ -3,7 +3,7 @@ import pkg from 'nayan-videos-downloader';
 const { capcut } = pkg;
 
 const handler = async (m, { conn, args }) => {
-  if (!args[0]) throw `✳️ Enter the CapCut link next to the command`;
+  if (!args[0]) throw `✳️ Enter the CapCut Video link next to the command`;
   if (!args[0].match(/(capcut\.com\/[^\s]+)/gi)) throw `❌ Link incorrect`;
   m.react('⏳');
 

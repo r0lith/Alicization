@@ -34,14 +34,14 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
     async function bbts() {
         let authFolderB = crypto.randomBytes(10).toString('hex').slice(0, 8);
 
-        if (!fs.existsSync("./bebots/" + authFolderB)) {
-            fs.mkdirSync("./bebots/" + authFolderB, { recursive: true });
+        if (!fs.existsSync("./auth/" + authFolderB)) {
+            fs.mkdirSync("./auth/" + authFolderB, { recursive: true });
         }
         if (args[0]) {
-            fs.writeFileSync("./bebots/" + authFolderB + "/creds.json", JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t'));
+            fs.writeFileSync("./auth/" + authFolderB + "/creds.json", JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t'));
         }
 
-        const { state, saveState, saveCreds } = await useMultiFileAuthState(`./bebots/${authFolderB}`);
+        const { state, saveState, saveCreds } = await useMultiFileAuthState(`./auth/${authFolderB}`);
         const msgRetryCounterCache = new NodeCache();
         const { version } = await fetchLatestBaileysVersion();
         let phoneNumber = m.sender.split('@')[0];
@@ -328,7 +328,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                 await sleep(5000);
                 if (args[0]) return;
                 await parent.sendMessage(conn.user.jid, { text: `✅ ${mssg.connMsg}` }, { quoted: m });
-                parent.sendMessage(conn.user.jid, { text: usedPrefix + command + " " + Buffer.from(fs.readFileSync("./bebots/" + authFolderB + "/creds.json"), "utf-8").toString("base64") }, { quoted: m });
+                parent.sendMessage(conn.user.jid, { text: usedPrefix + command + " " + Buffer.from(fs.readFileSync("./auth/" + authFolderB + "/creds.json"), "utf-8").toString("base64") }, { quoted: m });
             }
         }
 
@@ -414,7 +414,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
 handler.help = ['botclone'];
 handler.tags = ['bebot'];
 handler.command = ['bebot', 'serbot', 'jadibot', 'botclone', 'clonebot', 'rent', 'rentbot'];
-handler.rowner = false;
+handler.rowner = true;
 
 export default handler;
 

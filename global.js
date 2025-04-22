@@ -8,7 +8,7 @@ import path, { join } from 'path'
 import { platform } from 'process'
 import { fileURLToPath, pathToFileURL } from 'url'
 import * as ws from 'ws'
-import SaveCreds from './lib/makesession.js'
+import SaveCreds from './lib/socket.js'
 import clearTmp from './lib/tempclear.js'
 global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') {
   return rmPrefix
@@ -23,7 +23,6 @@ global.__dirname = function dirname(pathURL) {
 global.__require = function require(dir = import.meta.url) {
   return createRequire(dir)
 }
-global.gurubot = 'https://www.guruapi.tech/api'
 
 import chalk from 'chalk'
 import { spawn } from 'child_process'
@@ -61,7 +60,7 @@ async function main() {
   const txt = global.SESSION_ID
 
   if (!txt) {
-    console.error('Environment variable not found.')
+    console.error('SESSION ID not found.')
     return
   }
 
@@ -104,7 +103,7 @@ const question = text => new Promise(resolve => rl.question(text, resolve))
 
 const { CONNECTING } = ws
 const { chain } = lodash
-const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
+const PORT = process.env.PORT || process.env.SERVER_PORT || 8000
 
 protoType()
 serialize()
@@ -451,7 +450,7 @@ if (pairingCode && !conn.authState.creds.registered) {
 
     if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
       console.log(
-        chalk.bgBlack(chalk.redBright("Start with your country's WhatsApp code, Example : 62xxx"))
+        chalk.bgBlack(chalk.redBright("Start with your country's WhatsApp code, Example : 92xxx"))
       )
       process.exit(0)
     }
@@ -463,7 +462,7 @@ if (pairingCode && !conn.authState.creds.registered) {
 
     if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
       console.log(
-        chalk.bgBlack(chalk.redBright("Start with your country's WhatsApp code, Example : 62xxx"))
+        chalk.bgBlack(chalk.redBright("Start with your country's WhatsApp code, Example : 92xxx"))
       )
 
       phoneNumber = await question(
@@ -558,8 +557,8 @@ async function connectionUpdate(update) {
 
   if (connection === 'open') {
     const { jid, name } = conn.user
-    const msg = `*ULTRA-MD Connected* \n\n *Prefix  : [ . ]* \n\n *Plugins : 340* \n\n *SUPPORT BY SUBSCRIBE*
-*youtube.com/@GlobalTechInfo*`
+    const msg = `*MEGA-AI GOT CONNECTED* \n\n *SUPPORT BY SUBSCRIBE*
+*youtube.com/@Riruru*`
 
     await conn.sendMessage(jid, { text: msg, mentions: [jid] }, { quoted: null })
 
@@ -748,12 +747,12 @@ async function _quickTest() {
   Object.freeze(global.support)
 }
 
-async function saafsafai() {
+async function Cleaning() {
   if (stopped === 'close' || !conn || !conn.user) return
   clearsession()
   console.log(chalk.cyanBright('\nStored Sessions Cleared'))
 }
 
-setInterval(saafsafai, 10 * 60 * 1000)
+setInterval(Cleaning, 10 * 60 * 1000)
 
 _quickTest().catch(console.error)

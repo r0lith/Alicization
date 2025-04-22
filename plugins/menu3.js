@@ -12,7 +12,7 @@ let handler = async function (m, { conn, text, usedPrefix }) {
   let pp = './assets/A.jpg';
 
   // Send a button message
-  await conn.sendButton(m.chat, m2, 'ULTRA-MD', pp, [
+  await conn.sendButton(m.chat, m2, 'MEGA-AI', pp, [
     ['⏍ Info', `${usedPrefix}botinfo`],
     ['⌬ Group', `${usedPrefix}grp`]
   ], m, { quoted: m });

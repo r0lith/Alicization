@@ -8,7 +8,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
         : m.sender
   if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`
 
-  let pp = './assets/B.jpg'
+  let pp = './assets/A.jpg'
   let more = String.fromCharCode(8206)
   let readMore = more.repeat(850)
 
@@ -76,10 +76,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
         'randomvid* - Random Videos you might like and love.\n\n' +
         '🖍️ *' +
         usedPrefix +
-        'fancy* - Fancy text generator Menu.\n\n' + 
-        '🖌️ *' +
-        usedPrefix +
-        'fancy2* - Will Create Images With Fancy Text.' 
+        'fancy* - Fancy text generator Menu.' 
         break
 
     case 'botmenu':
@@ -111,7 +108,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ◈ •listprem
 ◈ •listmenu
 ◈ •mrcs
-◈ © GlobalTechInfo
+◈ © Riruru
 ╰─────────❍` // Your bot menu message here
       break
       case 'aimenu':
@@ -301,6 +298,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ╭───『 *Download* 』─❍
 ◈ •likee
 ◈ •pinterest
+◈ •pinterest2
 ◈ •threads
 ◈ •capcut
 ◈ •itunes
@@ -312,13 +310,18 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ◈ •ytmp3 
 ◈ •ytmp4
 ◈ •gdrive
-◈ •gitclone 
+◈ •gitclone
+◈ •githubstalk
+◈ •npmstalk
+◈ •githubdl
 ◈ •twitter
 ◈ •tiktok
-◈ •tiktokstalk
+◈ •ttstalk
+◈ •gimage
 ◈ •insta
 ◈ •igstory
 ◈ •igstalk
+◈ •mediafire
 ◈ •facebook
 ◈ •wallpapers
 ◈ •rwall
@@ -326,6 +329,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ◈ •swdl
 ◈ •apksearch
 ◈ •playstore
+◈ •ringtone
 ◈ •dlstatus
 ╰─────────❍` //
       break
@@ -546,6 +550,7 @@ lkr=`
 ╭───『 *Tools* 』─❍
 ◈ •autosticker
 ◈ •topdf
+◈ •base64
 ◈ •whatmusic
 ◈ •filelength
 ◈ •tempmail
@@ -558,6 +563,12 @@ lkr=`
 ◈ •imdb
 ◈ •reddit
 ◈ •lyrics
+◈ •wattpad
+◈ •happymod
+◈ •android
+◈ •styletext
+◈ •trendtwit
+◈ •wikipedia
 ◈ •readmore
 ◈ •ssweb
 ◈ •carbon
@@ -565,12 +576,10 @@ lkr=`
 ◈ •translate
 ◈ •tourl
 ◈ •trace
-◈ •wikipedia
 ◈ •nowa
 ◈ •qrmaker
 ◈ •readqr
 ◈ •fancy
-◈ •fancy2
 ◈ •weather
 ◈ •tocartoon
 ◈ •quote

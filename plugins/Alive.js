@@ -20,14 +20,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     text: 'Riruru Initializing', // Text content in case a message body is needed
     contextInfo: {
       mentionedJid: [m.sender],
-      externalAdReply: {
-        title: 'Rolith',
-        body: 'Rolith',
-        thumbnailUrl: img,
-        sourceUrl: 'https://wa.me/+919737825303',
-        mediaType: 1,
-        renderLargerThumbnail: true,
-      },
+   
     },
   };
 

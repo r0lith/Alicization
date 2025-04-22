@@ -1,7 +1,7 @@
 {
-    "name": "Ultra",
-    "version": "3.1.9",
-    "description": "Advanced WhatsApp",
+    "name": "mega",
+    "version": "4.0.0",
+    "description": "Advanced AI",
     "main": "index.js",
     "type": "module",
     "directories": {
@@ -10,7 +10,7 @@
         "plugins": "plugins"
     },
     "engines": {
-        "node": ">=20.0.0"
+        "node": "20.0.0"
     },
     "scripts": {
         "start": "node index.js",
@@ -22,22 +22,22 @@
         "whatsapp",
         "js-whatsapp",
         "whatsapp",
-        "ultra-bot",
-        "Global-bot-md",
+        "mega-bot",
+        "mega-bot-md",
         "multi-device",
         "MD",
         "baileys-md"
     ],
-    "homepage": "https://github.com/GlobalTechInfo/ULTRA-MD",
+    "homepage": "https://github.com/Riruru/MEGA-AI",
     "author": {
-        "name": "GlobalTechInfo"
+        "name": "Riruru"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/GlobalTechInfo/ULTRA-MD.git"
+        "url": "git+https://github.com/Riruru/MEGA-AI.git"
     },
     "bugs": {
-        "url": "https://github.com/GlobalTechInfo/ULTRA-MD/issues"
+        "url": "https://github.com/Riruru/MEGA-AI/issues"
     },
     "license": "Apache License 2.0",
     "dependencies": {
@@ -46,16 +46,17 @@
         "@hapi/boom": "^10.0.1",
         "@shineiichijo/marika": "^3.0.1",
         "@vitalets/google-translate-api": "^9.2.0",
-        "@whiskeysockets/baileys": "^6.6.0",
+        "@whiskeysockets/baileys": "^6.7.12",
         "@xct007/frieren-scraper": "*",
         "acrcloud": "^1.4.0",
         "awesome-phonenumber": "^3.4.0",
         "axios": "^1.4.0",
+        "api-qasim": "*",
         "chalk": "^5.1.0",
-        "canvas": "*",
         "cheerio": "^1.0.0-rc.12",
         "chess.js": "*",
         "colors": "1.4.0",
+        "csv-parser": "^3.0.0",
         "dotenv": "^16.1.4",
         "emoji-api": "^2.0.1",
         "express": "^4.18.1",
@@ -71,6 +72,7 @@
         "got": "^11.8.6",
         "heroku-client": "^3.1.0",
         "hispamemes": "^1.0.7",
+        "https": "1.0.0",
         "human-readable": "^0.2.1",
         "hxz-api": "^1.0.1",
         "imagemaker.js": "*",
@@ -90,10 +92,12 @@
         "node-fetch": "^3.3.1",
         "node-gtts": "^2.0.2",
         "node-webpmux": "^3.1.3",
+        "node-cache": "^5.1.2",
         "pdfkit": "^0.13.0",
         "perf_hooks": "^0.0.1",
         "pino": "^8.6.1",
         "pino-pretty": "^9.1.1",
+        "puppeteer": "24.1.0",
         "qrcode": "^1.5.1",
         "qrcode-terminal": "^0.12.0",
         "readline": "^1.3.0",
@@ -104,7 +108,7 @@
         "tempmail.lol": "^4.1.0",
         "terminal-image": "^2.0.0",
         "truesearch": "^1.0.2",
-        "undici": "^6.19.4",
+        "undici": "^7.3.0",
         "uuid": "^11.0.2",
         "url-regex-safe": "^3.0.0",
         "wa-sticker-formatter": "^4.3.2",
@@ -120,5 +124,15 @@
     },
     "devDependencies": {
         "prettier": "^3.2.5"
+    },
+    "contributors": [
+    {
+      "name": "Qasim Ali",
+      "role": "Lead Developer"
+    },
+    {
+      "name": "Riruru",
+      "role": "Maintainer"
     }
+  ]
 }

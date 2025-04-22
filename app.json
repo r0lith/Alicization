@@ -1,10 +1,10 @@
 {
   "name": "whatsapp-Automation",
-  "description": " Whatsapp Ai.",
+  "description": " Whatsapp Ai",
   "keywords": [
     "whatsapp Ai"
   ],
-  "repository": "https://github.com/GlobalTechInfo/ULTRA-MD",
+  "repository": "https://github.com/Riruru/MEGA-AI",
   "stack": "container",
   "env": {
     "OWNERS": {
