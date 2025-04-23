@@ -7,7 +7,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (command === 'riruru') {
     if (text.toLowerCase() === 'on') {
       riruruMode[m.chat] = true;
-      await conn.sendMessage(m.chat, { text: 'Riruru mode has been turned ON for this chat.' }, { quoted: m });
+      await conn.sendMessage(m.chat, { text: 'Riruru mode has been turned ON for this chat. For the free version, Please use command handler "!a" with each response' }, { quoted: m });
     } else if (text.toLowerCase() === 'off') {
       riruruMode[m.chat] = false;
       await conn.sendMessage(m.chat, { text: 'Riruru mode has been turned OFF for this chat.' }, { quoted: m });
