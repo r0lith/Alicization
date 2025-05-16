@@ -1,6 +1,6 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
 import './config.js'
-
+import { makeInMemoryStore } from '@whiskeysockets/baileys/lib/store/index.js'
 import dotenv from 'dotenv'
 import { existsSync, readFileSync, readdirSync, unlinkSync, watch } from 'fs'
 import { createRequire } from 'module'
@@ -43,7 +43,6 @@ const {
   MessageRetryMap,
   fetchLatestWaWebVersion,
   makeCacheableSignalKeyStore,
-  makeInMemoryStore,
   Browsers,
   proto,
   delay,
