@@ -43,6 +43,7 @@ const {
   MessageRetryMap,
   fetchLatestWaWebVersion,
   makeCacheableSignalKeyStore,
+  makeInMemoryStore,
   Browsers,
   proto,
   delay,
@@ -84,7 +85,7 @@ const MAIN_LOGGER = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }
 
 const logger = MAIN_LOGGER.child({})
 logger.level = 'fatal'
-const { makeInMemoryStore } = await import('@whiskeysockets/baileys/lib/Store.js')
+
 const store = useStore ? makeInMemoryStore({ logger }) : undefined
 store?.readFromFile('./session.json')
 
