@@ -1,6 +1,6 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
 import './config.js'
-import { makeInMemoryStore } from '@whiskeysockets/baileys/lib/store/index.js'
+
 import dotenv from 'dotenv'
 import { existsSync, readFileSync, readdirSync, unlinkSync, watch } from 'fs'
 import { createRequire } from 'module'
@@ -84,7 +84,7 @@ const MAIN_LOGGER = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }
 
 const logger = MAIN_LOGGER.child({})
 logger.level = 'fatal'
-
+const { makeInMemoryStore } = await import('@whiskeysockets/baileys/lib/store/index.js')
 const store = useStore ? makeInMemoryStore({ logger }) : undefined
 store?.readFromFile('./session.json')
 
