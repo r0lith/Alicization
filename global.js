@@ -70,7 +70,12 @@ const MAIN_LOGGER = Pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }
 const logger = MAIN_LOGGER.child({})
 logger.level = 'fatal'
 
-const store = useStore ? baileys.makeInMemoryStore({ logger }) : undefined
+// Replace this line:
+// const store = useStore ? baileys.makeInMemoryStore({ logger }) : undefined
+
+// With this workaround for CommonJS default export:
+const makeInMemoryStore = (baileys.makeInMemoryStore || baileys.default?.makeInMemoryStore)
+const store = useStore ? makeInMemoryStore({ logger }) : undefined
 store?.readFromFile('./session.json')
 
 setInterval(() => {
