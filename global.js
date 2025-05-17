@@ -37,6 +37,7 @@ import CloudDBAdapter from './lib/cloudDBAdapter.js'
 import { mongoDB, mongoDBV2 } from './lib/mongoDB.js'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
 import baileys from '@whiskeysockets/baileys'
+import readline from 'readline'
 const {
   DisconnectReason,
   useMultiFileAuthState,
