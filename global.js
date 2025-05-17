@@ -61,6 +61,11 @@ const { CONNECTING } = ws
 const { chain } = lodash
 const PORT = process.env.PORT || process.env.SERVER_PORT || 8000
 
+// Add these lines before connectionOptions is used:
+const pairingCode = !!global.pairingNumber || process.argv.includes('--pairing-code')
+const useQr = process.argv.includes('--qr')
+const useStore = true
+
 protoType()
 serialize()
 
