@@ -44,7 +44,6 @@ const {
   MessageRetryMap,
   fetchLatestWaWebVersion,
   makeCacheableSignalKeyStore,
-  makeInMemoryStore,
   Browsers,
   proto,
   delay,
@@ -71,13 +70,14 @@ const MAIN_LOGGER = Pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }
 const logger = MAIN_LOGGER.child({})
 logger.level = 'fatal'
 
-const store = useStore ? makeInMemoryStore({ logger }) : undefined
+const store = useStore ? baileys.makeInMemoryStore({ logger }) : undefined
 store?.readFromFile('./session.json')
 
 setInterval(() => {
   store?.writeToFile('./session.json')
 }, 10000 * 6)
 
+// Move this line up so it's before connectionOptions:
 const msgRetryCounterCache = new NodeCache()
 
 protoType()
