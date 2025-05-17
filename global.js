@@ -73,8 +73,16 @@ logger.level = 'fatal'
 // Replace this line:
 // const store = useStore ? baileys.makeInMemoryStore({ logger }) : undefined
 
-// With this workaround for CommonJS default export:
-const makeInMemoryStore = (baileys.makeInMemoryStore || baileys.default?.makeInMemoryStore)
+// With this fallback for all possible export styles:
+let makeInMemoryStore =
+  baileys.makeInMemoryStore ||
+  (baileys.default && baileys.default.makeInMemoryStore) ||
+  (await import('@whiskeysockets/baileys')).makeInMemoryStore ||
+  (await import('@whiskeysockets/baileys')).default?.makeInMemoryStore
+
+if (typeof makeInMemoryStore !== 'function') {
+  throw new Error('makeInMemoryStore is not available from @whiskeysockets/baileys')
+}
 const store = useStore ? makeInMemoryStore({ logger }) : undefined
 store?.readFromFile('./session.json')
 
