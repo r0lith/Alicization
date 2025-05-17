@@ -36,8 +36,7 @@ import yargs from 'yargs'
 import CloudDBAdapter from './lib/cloudDBAdapter.js'
 import { mongoDB, mongoDBV2 } from './lib/mongoDB.js'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
-
-const {
+import {
   DisconnectReason,
   useMultiFileAuthState,
   MessageRetryMap,
@@ -48,52 +47,7 @@ const {
   proto,
   delay,
   jidNormalizedUser,
-} = await (
-  await import('@whiskeysockets/baileys')
-).default
-
-import readline from 'readline'
-
-dotenv.config()
-
-async function main() {
-  const txt = global.SESSION_ID
-
-  if (!txt) {
-    console.error('SESSION ID not found.')
-    return
-  }
-
-  try {
-    await SaveCreds(txt)
-    console.log('Check Completed.')
-  } catch (error) {
-    console.error('Error:', error)
-  }
-}
-
-main()
-
-await delay(1000 * 10)
-
-
-const pairingCode = !!global.pairingNumber || process.argv.includes('--pairing-code')
-const useQr = process.argv.includes('--qr')
-const useStore = true
-
-const MAIN_LOGGER = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` })
-
-const logger = MAIN_LOGGER.child({})
-logger.level = 'fatal'
-
-const store = useStore ? makeInMemoryStore({ logger }) : undefined
-store?.readFromFile('./session.json')
-
-setInterval(() => {
-  store?.writeToFile('./session.json')
-}, 10000 * 6)
-
-const msgRetryCounterCache = new NodeCache()
+} from '@whiskeysockets/baileys'
 
 const rl = readline.createInterface({
   input: process.stdin,
