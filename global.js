@@ -36,7 +36,8 @@ import yargs from 'yargs'
 import CloudDBAdapter from './lib/cloudDBAdapter.js'
 import { mongoDB, mongoDBV2 } from './lib/mongoDB.js'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
-import {
+import baileys from '@whiskeysockets/baileys'
+const {
   DisconnectReason,
   useMultiFileAuthState,
   MessageRetryMap,
@@ -47,7 +48,7 @@ import {
   proto,
   delay,
   jidNormalizedUser,
-} from '@whiskeysockets/baileys'
+} = baileys
 
 const rl = readline.createInterface({
   input: process.stdin,
