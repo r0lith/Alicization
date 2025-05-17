@@ -66,6 +66,20 @@ const pairingCode = !!global.pairingNumber || process.argv.includes('--pairing-c
 const useQr = process.argv.includes('--qr')
 const useStore = true
 
+// Add this block before connectionOptions:
+const MAIN_LOGGER = Pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` })
+const logger = MAIN_LOGGER.child({})
+logger.level = 'fatal'
+
+const store = useStore ? makeInMemoryStore({ logger }) : undefined
+store?.readFromFile('./session.json')
+
+setInterval(() => {
+  store?.writeToFile('./session.json')
+}, 10000 * 6)
+
+const msgRetryCounterCache = new NodeCache()
+
 protoType()
 serialize()
 
