@@ -36,19 +36,64 @@ import yargs from 'yargs'
 import CloudDBAdapter from './lib/cloudDBAdapter.js'
 import { mongoDB, mongoDBV2 } from './lib/mongoDB.js'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
-import baileys from '@whiskeysockets/baileys'
-import readline from 'readline'
+
 const {
   DisconnectReason,
   useMultiFileAuthState,
   MessageRetryMap,
   fetchLatestWaWebVersion,
   makeCacheableSignalKeyStore,
+  makeInMemoryStore,
   Browsers,
   proto,
   delay,
   jidNormalizedUser,
-} = baileys
+} = await (
+  await import('@whiskeysockets/baileys')
+).default
+
+import readline from 'readline'
+
+dotenv.config()
+
+async function main() {
+  const txt = global.SESSION_ID
+
+  if (!txt) {
+    console.error('SESSION ID not found.')
+    return
+  }
+
+  try {
+    await SaveCreds(txt)
+    console.log('Check Completed.')
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
+
+main()
+
+await delay(1000 * 10)
+
+
+const pairingCode = !!global.pairingNumber || process.argv.includes('--pairing-code')
+const useQr = process.argv.includes('--qr')
+const useStore = true
+
+const MAIN_LOGGER = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` })
+
+const logger = MAIN_LOGGER.child({})
+logger.level = 'fatal'
+
+const store = useStore ? makeInMemoryStore({ logger }) : undefined
+store?.readFromFile('./session.json')
+
+setInterval(() => {
+  store?.writeToFile('./session.json')
+}, 10000 * 6)
+
+const msgRetryCounterCache = new NodeCache()
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -59,18 +104,6 @@ const question = text => new Promise(resolve => rl.question(text, resolve))
 const { CONNECTING } = ws
 const { chain } = lodash
 const PORT = process.env.PORT || process.env.SERVER_PORT || 8000
-
-// Add these lines before connectionOptions is used:
-const pairingCode = !!global.pairingNumber || process.argv.includes('--pairing-code')
-const useQr = process.argv.includes('--qr')
-const useStore = true
-
-// Add this block before connectionOptions:
-const MAIN_LOGGER = Pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` })
-const logger = MAIN_LOGGER.child({})
-logger.level = 'fatal'
-
-const msgRetryCounterCache = new NodeCache()
 
 protoType()
 serialize()
@@ -165,7 +198,8 @@ const connectionOptions = {
   generateHighQualityLinkPreview: true,
   getMessage: async key => {
     let jid = jidNormalizedUser(key.remoteJid)
-    return '' // or implement your own message retrieval logic
+    let msg = await store.loadMessage(jid, key.id)
+    return msg?.message || ''
   },
   patchMessageBeforeSending: message => {
     const requiresPatch = !!(
@@ -196,7 +230,7 @@ const connectionOptions = {
 
 global.conn = makeWASocket(connectionOptions)
 conn.isInit = false
-// store?.bind(conn.ev)
+store?.bind(conn.ev)
 
 if (pairingCode && !conn.authState.creds.registered) {
   let phoneNumber
