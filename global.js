@@ -536,17 +536,33 @@ async function connectionUpdate(update) {
   const code =
     lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
 
+  // Log disconnect reason for debugging
+  if (lastDisconnect && lastDisconnect.error) {
+    console.error('Disconnect reason:', lastDisconnect.error?.message || lastDisconnect.error)
+  }
+
+  // Only attempt reconnect for specific reasons, and add a delay to avoid rapid loops
   if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
     try {
       conn.logger.info(await global.reloadHandler(true))
+      // Add a delay before retrying to avoid rapid reconnects
+      await new Promise(res => setTimeout(res, 5000))
     } catch (error) {
       console.error('Error reloading handler:', error)
     }
+    return
   }
 
   if (code && (code === DisconnectReason.restartRequired || code === 428)) {
     conn.logger.info(chalk.yellow('\n🌀 Restart Required... Restarting'))
     process.send('reset')
+    return
+  }
+
+  if (code === DisconnectReason.loggedOut) {
+    conn.logger.error(chalk.red('\nSession logged out. Please delete your session and login again.'))
+    process.exit(0)
+    return
   }
 
   if (global.db.data == null) loadDatabase()
@@ -567,6 +583,7 @@ async function connectionUpdate(update) {
 
   if (connection === 'close') {
     conn.logger.error(chalk.yellow(`\nConnection closed... Get a new session`))
+    // Do not immediately reconnect here; handled above with delay and reason check
   }
 }
 
