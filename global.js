@@ -177,13 +177,7 @@ const connectionOptions = {
   browser: Browsers.macOS("Safari"),
   auth: {
     creds: state.creds,
-    keys: makeCacheableSignalKeyStore(
-      state.keys,
-      Pino().child({
-        level: 'fatal',
-        stream: 'store',
-      })
-    ),
+    keys: state.keys,
   },
   markOnlineOnConnect: true,
   generateHighQualityLinkPreview: true,
