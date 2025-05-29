@@ -2,7 +2,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
 import './config.js'
 
 import dotenv from 'dotenv'
-import { existsSync, readFileSync, readdirSync, unlinkSync, watch } from 'fs'
+import { readdirSync, unlinkSync, watch } from 'fs'
 import { createRequire } from 'module'
 import path, { join } from 'path'
 import { platform } from 'process'
@@ -43,7 +43,6 @@ const {
   MessageRetryMap,
   fetchLatestWaWebVersion,
   makeCacheableSignalKeyStore,
-  makeInMemoryStore,
   Browsers,
   proto,
   delay,
@@ -85,13 +84,6 @@ const MAIN_LOGGER = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }
 
 const logger = MAIN_LOGGER.child({})
 logger.level = 'fatal'
-
-const store = useStore ? makeInMemoryStore({ logger }) : undefined
-store?.readFromFile('./session.json')
-
-setInterval(() => {
-  store?.writeToFile('./session.json')
-}, 10000 * 6)
 
 const msgRetryCounterCache = new NodeCache()
 
@@ -197,9 +189,7 @@ const connectionOptions = {
   markOnlineOnConnect: true,
   generateHighQualityLinkPreview: true,
   getMessage: async key => {
-    let jid = jidNormalizedUser(key.remoteJid)
-    let msg = await store.loadMessage(jid, key.id)
-    return msg?.message || ''
+    return ''
   },
   patchMessageBeforeSending: message => {
     const requiresPatch = !!(
@@ -230,7 +220,6 @@ const connectionOptions = {
 
 global.conn = makeWASocket(connectionOptions)
 conn.isInit = false
-store?.bind(conn.ev)
 
 if (pairingCode && !conn.authState.creds.registered) {
   let phoneNumber
